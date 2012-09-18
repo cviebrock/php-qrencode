@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<extension name="qrencode" version="0.0.3">
+ <deps language="c" platform="all">
+  <with defaults="/usr:/usr/local" testfile="include/qrencode.h">
+   <header name="qrencode.h" />
+   <lib name="qrencode" platform="all" />
+  </with>
+ </deps>
+
+ <constants>
+  <constant name="QR_MODE_NUM" />
+  <constant name="QR_MODE_AN" />
+  <constant name="QR_MODE_8" />
+  <constant name="QR_MODE_KANJI" />
+  <constant name="QR_ECLEVEL_L" />
+  <constant name="QR_ECLEVEL_M" />
+  <constant name="QR_ECLEVEL_Q" />
+  <constant name="QR_ECLEVEL_H" />
+ </constants>
+
+ <function name="qrencode">
+  <proto>array qrencode(string text,int version,int level,int mode)</proto>
+  <code>
+    <![CDATA[
+
+    QRinput *input;
+    QRcode *code;
+    unsigned char *p;
+    int x,y;
+
+    input = QRinput_new();
+    QRinput_append(input,mode,text_len,text);
+	// as per http://hirokawa.netflowers.jp/entry/4900/#comment_51714
+    //code = QRcode_encodeInput(input,version,level);
+    code = QRcode_encodeInput(input);
+
+    //code = QRcode_encodeString(text, version, level, mode);
+
+    if(code == NULL) {
+        RETURN_FALSE;
+    }
+
+    array_init(return_value);
+
+    p = code->data;
+    for(y=0;y<code->width;y++){
+
+        zval *new_array;
+        MAKE_STD_ZVAL(new_array);
+        array_init(new_array);
+
+        for(x=0;x<code->width;x++){
+            add_next_index_long(new_array, (*p &1)?1:0);
+            p++;
+        }
+        add_next_index_zval(return_value, new_array);
+    }
+
+    QRinput_free(input);
+    QRcode_free(code);
+
+    ]]>
+  </code>
+ </function>
+
+</extension>
