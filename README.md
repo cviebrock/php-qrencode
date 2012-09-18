@@ -16,19 +16,25 @@ Please see that package's README for instructions.
 
 Then, compile php-qrencode:
 
-		cd ../php-qrencode
-		phpize
-		./configure
-		make
-		sudo make install
+```
+cd ../php-qrencode
+phpize
+./configure
+make
+sudo make install
+```
 
 Finally, add the following to the end of your `php.ini` file:
 
-		extension=qrencode.so
+```
+extension=qrencode.so
+```
 
 ## Usage
 
-		array qrencode( string $data, int $ecc, int $version, int $mode );
+```
+array qrencode( string $data, int $ecc, int $version, int $mode );
+```
 
 `$data` is the information to encode in the QR Code (e.g. URL, vCard, phone number, etc.).
 
@@ -42,51 +48,53 @@ The returned two-dimensional array defines the on/off state for each pixel "bloc
 
 To turn this data into an image, you will need to use GD functions, and loop through the array, building the image as you go.  e.g.:
 
-		<?php
+```
+<?php
 
-		$data = qrencode( 'Hello world!', QR_ECLEVEL_L, 1, QR_MODE_8 );
+$data = qrencode( 'Hello world!', QR_ECLEVEL_L, 1, QR_MODE_8 );
 
-		$size = count( $data );
-		$im = imagecreate( $size, $size );
+$size = count( $data );
+$im = imagecreate( $size, $size );
 
-		$color_bg = imagecolorallocate( $im, 255, 255, 255 );
-		$color_fg = imagecolorallocate( $im, 0, 0, 0 );
+$color_bg = imagecolorallocate( $im, 255, 255, 255 );
+$color_fg = imagecolorallocate( $im, 0, 0, 0 );
 
-		imagefill( $im, 0, 0, $color_bg );
+imagefill( $im, 0, 0, $color_bg );
 
-		for( $y = 0; $y < $size; $y++ ) {
-			for( $x = 0; $x < $size; $x++ ) {
-				if ( $data[$y][$x] ) {
-					imagesetpixel( $im, $x, $y, $color_fg );
-				}
-			}
+for( $y = 0; $y < $size; $y++ ) {
+	for( $x = 0; $x < $size; $x++ ) {
+		if ( $data[$y][$x] ) {
+			imagesetpixel( $im, $x, $y, $color_fg );
 		}
+	}
+}
 
-		imagepng( $im );
-
+imagepng( $im );
+?>
+```
 
 
 ## PHP Constants
 
 ### Storage Modes
 
-* `QR_MODE_NUM` - numeric only, max. 7,089 characters, 0-9
+- `QR_MODE_NUM` - numeric only, max. 7,089 characters, 0-9
 
-* `QR_MODE_AN` - alphanumeric, max. 4,296 characters, 0-9, A-Z (uppercase only), space, $, %, *, +, -, ., /, :
+- `QR_MODE_AN` - alphanumeric, max. 4,296 characters, 0-9, A-Z (uppercase only), space, $, %, *, +, -, ., /, :
 
-* `QR_MODE_8` - binary/byte, max. 2,953 characters (8-bit bytes) or 23624 bits
+- `QR_MODE_8` - binary/byte, max. 2,953 characters (8-bit bytes) or 23624 bits
 
-* `QR_MODE_KANJI` - Kanji/Kana, max. 1,817 characters
+- `QR_MODE_KANJI` - Kanji/Kana, max. 1,817 characters
 
 ### Error Correction Levels
 
-* `QR_ECLEVEL_L` - Low (approximately 7% of codewords can be restored)
+- `QR_ECLEVEL_L` - Low (approximately 7% of codewords can be restored)
 
-* `QR_ECLEVEL_M` - Medium (15%)
+- `QR_ECLEVEL_M` - Medium (15%)
 
-* `QR_ECLEVEL_Q` - Quartile (25%)
+- `QR_ECLEVEL_Q` - Quartile (25%)
 
-* `QR_ECLEVEL_H` - High (30%)
+- `QR_ECLEVEL_H` - High (30%)
 
 
 -----
