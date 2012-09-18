@@ -48,9 +48,7 @@ The returned two-dimensional array defines the on/off state for each pixel "bloc
 
 To turn this data into an image, you will need to use GD functions, and loop through the array, building the image as you go.  e.g.:
 
-```
-<?php
-
+```php
 $data = qrencode( 'Hello world!', QR_ECLEVEL_L, 1, QR_MODE_8 );
 
 $size = count( $data );
@@ -70,7 +68,6 @@ for( $y = 0; $y < $size; $y++ ) {
 }
 
 imagepng( $im );
-?>
 ```
 
 
