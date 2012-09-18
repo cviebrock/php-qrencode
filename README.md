@@ -71,15 +71,21 @@ To turn this data into an image, you will need to use GD functions, and loop thr
 ### Storage Modes
 
 * `QR_MODE_NUM` - numeric only, max. 7,089 characters, 0-9
+
 * `QR_MODE_AN` - alphanumeric, max. 4,296 characters, 0-9, A-Z (uppercase only), space, $, %, *, +, -, ., /, :
+
 * `QR_MODE_8` - binary/byte, max. 2,953 characters (8-bit bytes) or 23624 bits
+
 * `QR_MODE_KANJI` - Kanji/Kana, max. 1,817 characters
 
 ### Error Correction Levels
 
 * `QR_ECLEVEL_L` - Low (approximately 7% of codewords can be restored)
+
 * `QR_ECLEVEL_M` - Medium (15%)
+
 * `QR_ECLEVEL_Q` - Quartile (25%)
+
 * `QR_ECLEVEL_H` - High (30%)
 
 
