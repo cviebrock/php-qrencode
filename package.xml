@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
+<package>
+
+  <name>qrencode</name>
+  <summary>PHP bindings to libqrencode</summary>
+
+  <configureoptions>
+   <configureoption name="with-qrencode" default="autodetect" prompt="qrencode installation directory?" />
+  </configureoptions>
+
+  <release>
+    <version>0.0.3</version>
+    <state>devel</state>
+    <date>2012-09-18</date>
+  </release>
+  <changelog>
+
+  </changelog>
+  <deps>
+    <dep type="php" rel="ge" version="5.0.0"/>
+  </deps>
+
+  <filelist>
+    <dir name="/">
+      <file role='doc' name='EXPERIMENTAL'/>
+      <file role='src' name='config.m4'/>
+      <file role='src' name='qrencode.dsp'/>
+      <file role='src' name='config.w32'/>
+      <file role='src' name='qrencode.c'/>
+      <file role='src' name='php_qrencode.h'/>
+      <dir name="tests">
+        <file role='test' name='qrencode.phpt'/>
+      </dir>
+    </dir>
+  </filelist>
+</package>
