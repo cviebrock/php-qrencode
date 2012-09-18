@@ -57,7 +57,7 @@ zend_module_entry qrencode_module_entry = {
 	PHP_RINIT(qrencode),     /* Replace with NULL if there is nothing to do at request start */
 	PHP_RSHUTDOWN(qrencode), /* Replace with NULL if there is nothing to do at request end   */
 	PHP_MINFO(qrencode),
-	"0.0.2-prestoh",
+	"0.0.3",
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
