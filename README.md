@@ -32,7 +32,7 @@ extension=qrencode.so
 
 ## Usage
 
-```
+```php
 array qrencode( string $data, int $ecc, int $version, int $mode );
 ```
 
