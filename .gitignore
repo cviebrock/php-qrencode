@@ -36,6 +36,7 @@ scan_makefile_in.awk
 *.ncb
 Release
 Release_inline
+run-tests.php
 Debug
 Release_TS
 Release_TSDbg
